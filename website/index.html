@@ -1,92 +1,153 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-airwrite-design="optical-v3">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070910">
+  <meta name="theme-color" content="#151311">
   <meta name="description" content="AIRWRITE — a laser-tracked touchless smart board powered by your camera and desktop computer.">
   <title>AIRWRITE — Human interaction, beyond the screen</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="optical-studio-v3.css?v=20261113">
   <script src="app.js" defer></script>
 </head>
 <body id="top">
   <div class="noise"></div>
 
   <!-- Cinematic intro: runs before sign-in. -->
-  <section class="splash" id="splash" aria-label="AIRWRITE intro animation">
-    <div class="splash-orbit orbit-one"></div><div class="splash-orbit orbit-two"></div>
-    <div class="splash-inner">
-      <div class="microline"><span class="live-beacon"></span> TOUCHLESS INTERACTION SYSTEM <span class="micro-divider"></span> INITIALISING</div>
-      <div class="splash-logo-wrap">
-        <svg class="splash-logo" viewBox="0 0 900 180" role="img" aria-label="AIRWRITE">
-          <defs><filter id="redGlow" x="-40%" y="-100%" width="180%" height="300%"><feGaussianBlur stdDeviation="9" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-          <text x="450" y="118" text-anchor="middle">AIRWRITE</text>
-          <path id="splashPath" d="M78 145 L175 145 L235 145 L306 145 L374 145 L450 145 L526 145 L594 145 L665 145 L725 145 L822 145" />
-          <circle class="splash-dot" r="7" filter="url(#redGlow)"><animateMotion dur="3.1s" repeatCount="1" fill="freeze" path="M78 145 L175 145 L235 145 L306 145 L374 145 L450 145 L526 145 L594 145 L665 145 L725 145 L822 145"/></circle>
-        </svg>
-      </div>
-      <p class="splash-tagline">YOUR SPACE. YOUR MOVEMENT. YOUR SCREEN.</p>
-      <div class="splash-loader"><span></span></div>
-      <button class="splash-enter" id="enterPortal" type="button">Enter AIRWRITE <span>↗</span></button>
+  <!-- AIRWRITE opening film: real product scene, animated laser path and hand tracking overlay. -->
+  <section class="splash aw3-splash" id="splash" aria-label="AIRWRITE product introduction">
+    <div class="aw3-splash-top">
+      <a class="aw3-brand" href="#top" aria-label="AIRWRITE home">
+        <img src="airwrite-mark.svg" alt="" aria-hidden="true">
+        <span><b>AIRWRITE</b><small>OPTICAL STUDIO</small></span>
+      </a>
+      <span class="aw3-top-status"><i></i> TOUCHLESS INTERACTION SYSTEM</span>
     </div>
-    <div class="splash-bottom"><span>CONNECT CAMERA</span><i></i><span>TRACK LASER</span><i></i><span>CREATE WITHOUT TOUCH</span></div>
+
+    <div class="aw3-splash-layout">
+      <div class="aw3-splash-copy">
+        <div class="aw3-kicker"><i></i> A NEW WAY TO WORK WITH YOUR SCREEN</div>
+        <h1>Move beyond<br><em>the touch.</em></h1>
+        <p>Write with a laser point. Navigate with your hand. Turn a compatible Windows display into a touchless creative surface.</p>
+        <div class="aw3-splash-modes">
+          <div><span class="aw3-mode-index">01</span><span><b>LASER WRITER</b><small>Precise point tracking</small></span></div>
+          <div><span class="aw3-mode-index">02</span><span><b>HAND GESTURE</b><small>Camera-based control</small></span></div>
+        </div>
+        <button class="splash-enter aw3-enter" id="enterPortal" type="button">
+          <span>Enter AIRWRITE</span><b aria-hidden="true">↗</b>
+        </button>
+        <div class="aw3-splash-footnote"><span class="aw3-foot-dot"></span> DESKTOP VISION RUNS LOCALLY ON YOUR WINDOWS PC</div>
+      </div>
+
+      <div class="aw3-splash-stage" aria-label="Demonstration of laser writing and hand gestures">
+        <img src="assets/airwrite-product-scene.webp" alt="A laser pointer and a raised hand interacting with a camera-equipped digital writing display">
+        <div class="aw3-image-vignette"></div>
+        <div class="aw3-stage-label aw3-stage-label-top"><span><i></i> AIRWRITE / LIVE CONCEPT</span><span>CAMERA · LASER · HAND</span></div>
+        <div class="aw3-laser-scan" aria-hidden="true"><span></span></div>
+        <div class="aw3-calibration-target aw3-target-one" aria-hidden="true"></div>
+        <div class="aw3-calibration-target aw3-target-two" aria-hidden="true"></div>
+        <div class="aw3-hand-tracking" aria-hidden="true">
+          <div class="aw3-hud-caption"><span>HAND TRACKING</span><b>21 LANDMARKS</b></div>
+          <svg viewBox="0 0 120 150" role="presentation">
+            <g class="aw3-hand-bones">
+              <path d="M59 126 L58 91 L45 69 L31 46 L23 34 L18 40 L31 67 L20 53 L12 49 L8 56 L26 81 L15 72 L8 76 L27 99 L21 93 L14 98 L39 124 L59 135" />
+              <path d="M58 91 L58 51 L57 20 Q57 11 64 11 Q71 12 70 21 L70 73" />
+              <path d="M70 76 L75 31 Q76 22 83 24 Q90 26 87 35 L81 82" />
+              <path d="M81 83 L94 49 Q98 40 104 44 Q111 48 106 57 L91 94 L84 116" />
+              <path d="M39 124 Q58 140 78 125 L91 103" />
+            </g>
+            <g class="aw3-hand-joints">
+              <circle cx="59" cy="126" r="3"/><circle cx="58" cy="91" r="3"/><circle cx="45" cy="69" r="3"/><circle cx="31" cy="46" r="3"/><circle cx="23" cy="34" r="3"/>
+              <circle cx="58" cy="51" r="3"/><circle cx="57" cy="20" r="3"/><circle cx="70" cy="73" r="3"/><circle cx="75" cy="31" r="3"/><circle cx="81" cy="82" r="3"/><circle cx="94" cy="49" r="3"/><circle cx="91" cy="94" r="3"/>
+            </g>
+          </svg>
+          <span class="aw3-hud-state"><i></i> TRACKING</span>
+        </div>
+        <div class="aw3-stage-label aw3-stage-label-bottom"><span>OPTICAL INPUT</span><b>PRECISION MEETS MOVEMENT</b><span>01 / 02</span></div>
+      </div>
+    </div>
+
+    <div class="aw3-splash-bottom"><span>01&nbsp; POINT</span><i></i><span>02&nbsp; GESTURE</span><i></i><span>03&nbsp; CREATE</span><span class="aw3-bottom-note">YOUR SPACE. YOUR MOVEMENT. YOUR SCREEN.</span></div>
   </section>
 
-  <!-- Login / registration view. -->
-  <main class="auth-page hidden" id="authPage">
-    <div class="auth-topbar">
-      <a class="brand" href="#top"><span class="brand-glyph"><i></i><i></i><i></i></span><b>AIRWRITE</b><span class="brand-edition">LOCAL STUDIO</span></a>
-      <div class="local-pill"><span class="green-dot"></span> SECURE CLOUD PORTAL</div>
-    </div>
-    <div class="auth-layout">
-      <section class="auth-story">
-        <div class="eyebrow"><span class="eyebrow-line"></span> A NEW WAY TO INTERACT</div>
-        <h1>Move beyond<br><em>the surface.</em></h1>
-        <p class="story-lede">Turn a compatible screen into a touchless workspace. Point, write, draw and control using a laser, a camera and AIRWRITE's desktop vision engine.</p>
-        <div class="story-art">
-          <div class="art-top"><span><b class="live-beacon"></b> AIRWRITE / OPTICAL TRACKING</span><span>LIVE CONCEPT</span></div>
-          <div class="art-screen">
-            <div class="art-grid"></div>
-            <svg viewBox="0 0 640 290" preserveAspectRatio="none" aria-hidden="true">
-              <path class="art-trace" d="M28 215 C90 202 94 70 164 82 S230 238 305 174 S396 40 450 97 S526 249 612 66" />
-              <path class="art-trace-soft" d="M28 215 C90 202 94 70 164 82 S230 238 305 174 S396 40 450 97 S526 249 612 66" />
-              <circle class="art-beam" r="5"><animateMotion dur="4.2s" repeatCount="indefinite" path="M28 215 C90 202 94 70 164 82 S230 238 305 174 S396 40 450 97 S526 249 612 66"/></circle>
-            </svg>
-            <div class="target-ring target-a"></div><div class="target-ring target-b"></div><div class="target-ring target-c"></div>
-            <span class="art-coordinate coord-a">X 046.2 / Y 018.7</span><span class="art-coordinate coord-b">MAPPED TO DISPLAY</span>
-          </div>
-          <div class="art-foot"><span>CAMERA INPUT <b>READY FOR DESKTOP</b></span><span>LOW-LATENCY LOCAL PROCESSING</span></div>
+  <!-- AIRWRITE optical studio: product-led sign-in and registration. -->
+  <!-- AIRWRITE account access: product story and clean cloud sign-in. -->
+  <main class="auth-page aw3-auth hidden" id="authPage">
+    <header class="aw3-topbar">
+      <a class="aw3-brand" href="#top" aria-label="AIRWRITE home">
+        <img src="airwrite-mark.svg" alt="" aria-hidden="true">
+        <span><b>AIRWRITE</b><small>OPTICAL STUDIO</small></span>
+      </a>
+      <div class="aw3-topbar-meta"><span class="aw3-engine-tag"><i></i> WINDOWS DESKTOP ENGINE</span><span class="aw3-secure-tag"><i></i> SECURE CLOUD PORTAL</span></div>
+    </header>
+
+    <div class="aw3-auth-layout">
+      <section class="aw3-auth-story" aria-label="AIRWRITE features">
+        <div class="aw3-story-copy">
+          <div class="aw3-kicker"><i></i> TOUCHLESS INTERACTION, ENGINEERED</div>
+          <h1>One workspace.<br><em>Two ways to create.</em></h1>
+          <p>Choose precise laser control or natural hand gestures. Both open the same AIRWRITE Smart Board on your Windows desktop.</p>
         </div>
-        <div class="story-points"><div><span class="point-icon">01</span><span><b>Computer vision</b><small>Laser spot detection from camera frames</small></span></div><div><span class="point-icon">02</span><span><b>Screen calibration</b><small>Map physical movement to your display</small></span></div><div><span class="point-icon">03</span><span><b>Smart Board</b><small>Write, draw, gesture and navigate</small></span></div></div>
+        <figure class="aw3-auth-photo">
+          <img src="assets/airwrite-product-scene.webp" alt="Laser pointer and hand gesture control in front of a camera-equipped display">
+          <div class="aw3-photo-shade"></div>
+          <figcaption><span><i></i> AIRWRITE IN PRACTICE</span><b>CAMERA-BASED · TOUCHLESS · LOCAL</b></figcaption>
+          <div class="aw3-photo-focus" aria-hidden="true"></div>
+        </figure>
+        <div class="aw3-feature-pair">
+          <article class="aw3-feature-mini aw3-feature-laser">
+            <div class="aw3-mini-visual" aria-hidden="true">
+              <svg viewBox="0 0 124 76"><rect x="19" y="9" width="86" height="54" rx="5"/><path d="M27 17 H97 V55 H27Z"/><path d="M5 67 L62 37 L114 19" class="aw3-mini-beam"/><circle cx="97" cy="25" r="5" class="aw3-mini-dot"/><path d="M53 66 H72"/></svg>
+            </div>
+            <div><small>MODE 01 / PRECISION</small><b>Laser Writer</b><p>Track a red point, calibrate the screen and control the board.</p></div>
+          </article>
+          <article class="aw3-feature-mini aw3-feature-hand">
+            <div class="aw3-mini-visual" aria-hidden="true">
+              <svg viewBox="0 0 124 76"><g class="aw3-mini-hand"><path d="M61 65 L61 38 L47 21 Q42 15 37 20 Q33 24 39 31 L48 43 L34 34 Q28 30 24 35 Q21 39 27 44 L48 61 Q58 69 75 62 L88 46 Q93 40 88 36 Q83 32 78 39 L72 47 L75 17 Q75 10 69 10 Q63 10 63 17 L61 38"/></g><g class="aw3-mini-nodes"><circle cx="61" cy="65" r="2.5"/><circle cx="61" cy="38" r="2.5"/><circle cx="47" cy="21" r="2.5"/><circle cx="75" cy="17" r="2.5"/><circle cx="88" cy="36" r="2.5"/></g></svg>
+            </div>
+            <div><small>MODE 02 / MOVEMENT</small><b>Hand Gesture Studio</b><p>Point, pinch, pan and navigate with camera-tracked gestures.</p></div>
+          </article>
+        </div>
+        <div class="aw3-privacy-line"><span>⌑</span> Camera frames and hand landmarks stay on your computer.</div>
       </section>
 
-      <section class="auth-card-wrap">
-        <div class="auth-card">
-          <div class="auth-card-head"><span class="auth-kicker">WELCOME TO YOUR WORKSPACE</span><div class="secure-mark">⌁ &nbsp; SECURE SESSION</div></div>
+      <aside class="aw3-auth-panel" aria-label="AIRWRITE account access">
+        <div class="aw3-panel-heading"><span>YOUR PRIVATE WORKSPACE</span><span><i></i> ENCRYPTED SESSION</span></div>
+        <section class="auth-card aw3-auth-card">
+          <div class="auth-card-head"><span class="auth-kicker">AIRWRITE ACCOUNT</span><span class="aw3-access-code">ACCOUNT ACCESS / 01</span></div>
           <h2 id="authTitle">Welcome back.</h2>
-          <p class="auth-subtitle" id="authSubtitle">Sign in to launch your AIRWRITE desktop experience.</p>
-          <div class="auth-tabs" role="tablist"><button class="auth-tab active" id="loginTab" type="button" role="tab" aria-selected="true">Sign in</button><button class="auth-tab" id="registerTab" type="button" role="tab" aria-selected="false">Create account</button></div>
-          <form id="loginForm" class="auth-form">
-            <label for="loginIdentifier">Email address</label><div class="input-shell"><span class="input-icon">◎</span><input id="loginIdentifier" name="identifier" type="text" autocomplete="username" placeholder="you@example.com" required></div>
-            <label for="loginPassword">Password</label><div class="input-shell"><span class="input-icon">⌑</span><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button class="password-toggle" type="button" data-toggle-password="loginPassword" aria-label="Show password">Show</button></div>
-            <button class="button button-primary button-wide" type="submit"><span>Sign in to AIRWRITE</span><b>↗</b></button>
+          <p class="auth-subtitle" id="authSubtitle">Sign in to open your AIRWRITE workspace.</p>
+          <div class="auth-tabs aw3-auth-tabs" role="tablist" aria-label="Account access">
+            <button class="auth-tab active" id="loginTab" type="button" role="tab" aria-selected="true" aria-controls="loginForm">Sign in</button>
+            <button class="auth-tab" id="registerTab" type="button" role="tab" aria-selected="false" aria-controls="registerForm">Create account</button>
+          </div>
+          <form id="loginForm" class="auth-form aw3-form">
+            <label for="loginIdentifier">Email address</label>
+            <div class="input-shell"><span class="input-icon" aria-hidden="true">@</span><input id="loginIdentifier" name="identifier" type="email" inputmode="email" autocapitalize="off" autocomplete="email" placeholder="name@example.com" required></div>
+            <label for="loginPassword">Password</label>
+            <div class="input-shell"><span class="input-icon" aria-hidden="true">◇</span><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button class="password-toggle" type="button" data-toggle-password="loginPassword" aria-label="Show password">Show</button></div>
+            <button class="button button-primary button-wide aw3-submit" type="submit"><span>Continue to AIRWRITE</span><b aria-hidden="true">↗</b></button>
           </form>
-          <form id="registerForm" class="auth-form hidden">
-            <div class="form-row"><div><label for="registerName">Full name</label><div class="input-shell"><span class="input-icon">♙</span><input id="registerName" name="full_name" type="text" autocomplete="name" placeholder="Your name" minlength="2" maxlength="100" required></div></div><div><label for="registerOrg">Organisation <small>optional</small></label><div class="input-shell"><span class="input-icon">⌂</span><input id="registerOrg" name="organisation" type="text" autocomplete="organization" placeholder="College / company"></div></div></div>
-            <label for="registerEmail">Email address</label><div class="input-shell"><span class="input-icon">✉</span><input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-            <label for="registerPassword">Create password <small>8 characters minimum</small></label><div class="input-shell"><span class="input-icon">⌑</span><input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="Create a strong password" required><button class="password-toggle" type="button" data-toggle-password="registerPassword">Show</button></div>
-            <label class="check-line"><input id="registerConsent" type="checkbox" required><span>I understand my registration details are securely saved in the AIRWRITE cloud database.</span></label>
-            <button class="button button-primary button-wide" type="submit"><span>Create my AIRWRITE account</span><b>↗</b></button>
+          <form id="registerForm" class="auth-form aw3-form hidden">
+            <div class="form-row aw3-register-row">
+              <div><label for="registerName">Full name</label><div class="input-shell"><span class="input-icon" aria-hidden="true">✳</span><input id="registerName" name="full_name" type="text" autocomplete="name" placeholder="Your name" minlength="2" maxlength="100" required></div></div>
+              <div><label for="registerOrg">Organisation <small>optional</small></label><div class="input-shell"><span class="input-icon" aria-hidden="true">⌂</span><input id="registerOrg" name="organisation" type="text" autocomplete="organization" placeholder="College / company"></div></div>
+            </div>
+            <label for="registerEmail">Email address</label>
+            <div class="input-shell"><span class="input-icon" aria-hidden="true">@</span><input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required></div>
+            <label for="registerPassword">Create password <small>8 characters minimum</small></label>
+            <div class="input-shell"><span class="input-icon" aria-hidden="true">◇</span><input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="Create a strong password" required><button class="password-toggle" type="button" data-toggle-password="registerPassword">Show</button></div>
+            <label class="check-line aw3-consent"><input id="registerConsent" type="checkbox" required><span>I agree that my account details are stored securely in the AIRWRITE cloud database.</span></label>
+            <button class="button button-primary button-wide aw3-submit" type="submit"><span>Create my account</span><b aria-hidden="true">↗</b></button>
           </form>
           <div class="auth-message" id="authMessage" role="status" aria-live="polite"></div>
-          <div class="auth-divider"><span></span><b>BUILT FOR CREATORS & EDUCATORS</b><span></span></div>
-          <div class="auth-foot"><span>By continuing, you agree to use AIRWRITE responsibly.</span><span class="privacy-label">CLOUD DATA · PASSWORD HASHED</span></div>
-        </div>
-        <div class="auth-help"><span class="help-orb">?</span><span>New here? Create an account. Owner access is private and configured by the AIRWRITE administrator.</span></div>
-      </section>
+          <div class="aw3-auth-foot"><span>One account for your AIRWRITE workspace.</span><b>PASSWORDS HASHED · SESSION PROTECTED</b></div>
+        </section>
+        <div class="aw3-account-note"><span class="aw3-note-icon">◎</span><span><b>Designed for real work.</b> Camera selection, calibration and desktop controls happen in the local Windows application.</span></div>
+      </aside>
     </div>
-    <footer class="site-legal"><span>© <span data-year></span> AIRWRITE STUDIO</span><span>CAMERA AND LASER PROCESSING RUN ON YOUR WINDOWS DESKTOP</span></footer>
+    <footer class="aw3-auth-footer"><span>© <span data-year></span> AIRWRITE STUDIO</span><span>LASER WRITING · HAND GESTURE CONTROL · SMART BOARD</span><span>BUILT FOR CREATORS, EDUCATORS AND TEAMS</span></footer>
   </main>
 
   <!-- Authenticated workspace. -->
@@ -98,27 +159,44 @@
     </header>
 
     <main id="workspaceHome">
-      <section class="workspace-hero page-width">
-        <div class="workspace-copy">
-          <div class="eyebrow"><span class="eyebrow-line"></span> YOUR TOUCHLESS WORKSPACE</div>
+      <section class="aw3-workspace-hero page-width">
+        <div class="aw3-workspace-copy">
+          <div class="aw3-kicker"><i></i> YOUR TOUCHLESS WORKSPACE</div>
           <p class="welcome-line" id="welcomeLine">WELCOME BACK</p>
-          <h1>Make the air<br><em>your interface.</em></h1>
-          <p>Launch the real Windows desktop engine. Choose your built-in laptop camera, a plug-in USB webcam or DroidCam. AIRWRITE verifies the live feed, captures the laser-off background and guides you through five full-screen calibration targets before opening the Smart Board.</p>
-          <div class="launch-actions">
-            <button class="launch-mode-card launch-laser" id="launchLaser" type="button">
-              <span class="launch-mode-icon">⌖</span><span class="launch-mode-copy"><b>Start Laser Writer</b><small>Open the real desktop app · camera preview · quick 5-point calibration · Smart Board</small></span><span class="launch-arrow">↗</span>
-            </button>
-            <button class="launch-mode-card launch-hand" id="launchHand" type="button">
-              <span class="launch-mode-icon">✋</span><span class="launch-mode-copy"><b>Start Hand Gesture Studio</b><small>Open the laptop webcam · learn gestures · draw, pan, zoom and control tools; no hand calibration</small></span><span class="launch-arrow">↗</span>
-            </button>
-          </div>
-          <div class="launch-note"><span class="green-dot"></span><span>Desktop bridge <b id="bridgeState">Checking…</b> · camera frames stay on this computer</span></div>
-          <div class="hero-footnote"><span>01 / CONNECT</span><span>02 / CALIBRATE</span><span>03 / CREATE</span></div>
+          <h1>Choose how<br><em>you want to create.</em></h1>
+          <p>Start a laser-controlled session for precise pointing and calibration, or open Hand Gesture Studio for natural camera-based control. Both lead to your AIRWRITE Smart Board.</p>
+          <div class="aw3-workspace-benefits"><span><i></i> Windows desktop engine</span><span><i></i> Local camera processing</span></div>
         </div>
-        <div class="workspace-visual">
-          <div class="visual-shell"><div class="visual-shell-head"><span><i class="live-beacon"></i> OPTICAL ENGINE</span><span class="live-state" id="desktopState">DESKTOP IDLE</span></div><div class="visual-canvas"><div class="visual-cross cross-one"></div><div class="visual-cross cross-two"></div><div class="visual-scan"></div><div class="visual-path"><svg viewBox="0 0 520 310" preserveAspectRatio="none" aria-hidden="true"><path d="M25 233 C90 230 95 85 160 101 S225 244 288 172 S375 45 425 108 S473 200 500 61"/></svg></div><div class="laser-reticle"><span></span></div><div class="visual-readout readout-one">SPOT TRACK / SIMULATED</div><div class="visual-readout readout-two">X: 0842 &nbsp; Y: 0416</div></div><div class="visual-shell-foot"><div><small>CAMERA</small><b>LAPTOP / USB / DROIDCAM</b></div><div><small>CALIBRATION</small><b id="calibrationReadout">5-POINT PROFILE</b></div><div><small>PROCESSING</small><b>LOCAL ONLY</b></div></div></div>
-          <div class="floating-metric"><span class="metric-ring">◎</span><span><b>Touchless control</b><small>Camera → Laser → Screen</small></span></div>
+        <div class="aw3-workspace-photo">
+          <img src="assets/airwrite-product-scene.webp" alt="AIRWRITE touchless writing workstation with laser pointer and hand gesture">
+          <div class="aw3-workspace-photo-shade"></div>
+          <div class="aw3-workspace-photo-top"><span><i></i> AIRWRITE / OPTICAL WORKSPACE</span><b id="desktopState">DESKTOP IDLE</b></div>
+          <div class="aw3-workspace-photo-bottom"><span>CAMERA → INTERPRETATION → ACTION</span><span class="aw3-cal-readout">CALIBRATION <b id="calibrationReadout">5-POINT PROFILE</b></span></div>
+          <div class="aw3-photo-reticle" aria-hidden="true"></div>
         </div>
+      </section>
+
+      <section class="aw3-mode-launch page-width" aria-label="Choose an AIRWRITE mode">
+        <div class="aw3-mode-heading"><div><span class="aw3-section-kicker">START A SESSION</span><h2>Choose your control method.</h2></div><p>Pick a mode to open the real Windows desktop application.</p></div>
+        <div class="aw3-mode-grid">
+          <button class="launch-mode-card launch-laser aw3-launch-card" id="launchLaser" type="button">
+            <div class="aw3-launch-top"><span>01 / PRECISION CONTROL</span><span class="aw3-launch-chip">LASER</span></div>
+            <div class="aw3-launch-art aw3-launch-laser-art" aria-hidden="true">
+              <svg viewBox="0 0 360 150"><rect x="74" y="17" width="214" height="112" rx="8"/><path d="M89 32 H273 V114 H89Z" class="aw3-monitor-screen"/><path d="M180 129 V141 M147 141 H213"/><path d="M16 120 L181 72 L313 39" class="aw3-launch-beam"/><circle cx="273" cy="52" r="8" class="aw3-launch-point"/><circle cx="273" cy="52" r="18" class="aw3-launch-ring"/><path d="M273 30 V23 M273 81 V74 M251 52 H244 M302 52 H295" class="aw3-launch-cross"/></svg>
+            </div>
+            <div class="launch-mode-copy aw3-launch-copy"><b>Laser Writer</b><small>Connect DroidCam or USB webcam, confirm the camera preview, capture the laser-off background and complete five-point screen calibration before opening Smart Board.</small></div>
+            <span class="aw3-launch-bottom"><span>START LASER SESSION</span><b class="launch-arrow">↗</b></span>
+          </button>
+          <button class="launch-mode-card launch-hand aw3-launch-card" id="launchHand" type="button">
+            <div class="aw3-launch-top"><span>02 / NATURAL CONTROL</span><span class="aw3-launch-chip">HAND</span></div>
+            <div class="aw3-launch-art aw3-launch-hand-art" aria-hidden="true">
+              <svg viewBox="0 0 360 150"><g class="aw3-hand-line"><path d="M176 134 L174 86 L151 55 Q143 44 134 51 Q126 59 136 70 L155 94 L128 76 Q117 69 110 78 Q104 87 116 97 L153 128 Q174 145 207 129 L229 96 Q238 82 226 75 Q214 68 204 85 L190 105 L197 29 Q199 14 187 12 Q174 10 173 26 L174 86"/><path d="M195 55 L207 38 Q216 27 226 35 Q236 43 227 54 L207 78"/></g><g class="aw3-hand-points"><circle cx="176" cy="134" r="4"/><circle cx="174" cy="86" r="4"/><circle cx="151" cy="55" r="4"/><circle cx="134" cy="51" r="4"/><circle cx="128" cy="76" r="4"/><circle cx="153" cy="128" r="4"/><circle cx="197" cy="29" r="4"/><circle cx="187" cy="12" r="4"/><circle cx="204" cy="85" r="4"/><circle cx="226" cy="35" r="4"/></g></svg>
+            </div>
+            <div class="launch-mode-copy aw3-launch-copy"><b>Hand Gesture Studio</b><small>Use your laptop or USB webcam. Point, pinch, pan, zoom and open the gesture menu to control writing, drawing and Smart Board tools.</small></div>
+            <span class="aw3-launch-bottom"><span>START HAND SESSION</span><b class="launch-arrow">↗</b></span>
+          </button>
+        </div>
+        <div class="aw3-bridge-line"><span class="aw3-bridge-led"></span><span>DESKTOP BRIDGE</span><b id="bridgeState">Checking…</b><span class="aw3-bridge-separator"></span><span>CAMERA FRAMES STAY ON THIS COMPUTER</span></div>
       </section>
 
       <section class="page-width status-grid" aria-label="System readiness">
@@ -171,7 +249,7 @@
       </section>
     </main>
     <section class="contact-band" id="contact"><div class="page-width contact-inner"><div><div class="eyebrow"><span class="eyebrow-line"></span> CONTACT / PRODUCT ENQUIRIES</div><h2>Let’s bring AIRWRITE<br><em>into your space.</em></h2><p>For product demonstrations, education pilots and collaboration enquiries.</p></div><div class="contact-card"><span class="contact-avatar">VV</span><div><small>PRODUCT CONTACT</small><b>Vishnu Vardhan</b><a href="tel:+917013080889">+91 70130 80889</a></div><a class="contact-call" href="tel:+917013080889" aria-label="Call Vishnu Vardhan">↗</a></div></div></section>
-    <footer class="app-footer"><div class="page-width"><a class="brand" href="#workspaceHome"><span class="brand-glyph"><i></i><i></i><i></i></span><b>AIRWRITE</b></a><span>Touchless interaction, thoughtfully engineered.</span><span>© <span data-year></span> AIRWRITE LOCAL STUDIO</span></div></footer>
+    <footer class="app-footer"><div class="page-width"><a class="brand" href="#workspaceHome"><span class="brand-glyph"><i></i><i></i><i></i></span><b>AIRWRITE</b></a><span>Touchless interaction, thoughtfully engineered.</span><span>© <span data-year></span> AIRWRITE STUDIO</span></div></footer>
   </div>
 
   <!-- Owner-only database view. -->

@@ -16,6 +16,7 @@
   let currentUser = null;
   let adminTableMode = 'users';
   let statusPoll = null;
+  let launchInProgress = false;
 
   document.querySelectorAll('[data-year]').forEach(node => node.textContent = String(new Date().getFullYear()));
 
@@ -98,7 +99,7 @@
     $('ownerNav').classList.toggle('hidden', user.role !== 'admin');
     if (statusPoll) clearInterval(statusPoll);
     refreshStatus();
-    statusPoll = setInterval(refreshStatus, 4500);
+    statusPoll = setInterval(refreshStatus, 12000);
   }
 
   function setAuthMode(mode) {
@@ -117,10 +118,7 @@
   }
 
   $('enterPortal').addEventListener('click', () => showAuth('login'));
-  setTimeout(() => {
-    if (!splash.classList.contains('leaving')) showAuth('login');
-  }, 4200);
-  $('loginTab').addEventListener('click', () => setAuthMode('login'));
+    $('loginTab').addEventListener('click', () => setAuthMode('login'));
   $('registerTab').addEventListener('click', () => setAuthMode('register'));
 
   document.querySelectorAll('[data-toggle-password]').forEach(button => {
@@ -192,26 +190,31 @@
       $('desktopState').textContent = running ? 'DESKTOP ACTIVE' : 'DESKTOP IDLE';
       $('engineStatus').textContent = running ? 'Running' : 'Ready to launch';
       $('engineDot').className = `status-indicator ${running ? 'green' : 'amber'}`;
-      ['launchLaser', 'launchHand'].forEach(id => {
-        const button = $(id);
-        if (button) button.disabled = running;
-      });
+      // Keep the mode cards actionable. The bridge itself reports whether an
+      // app is already running or a different mode must be closed first.
+      $('engineStatus').textContent = running
+        ? `${data.desktop_mode === 'hand' ? 'Hand Gesture Studio' : 'Laser Writer'} active`
+        : 'Ready to launch';
       if (running) {
         const activeName = data.desktop_mode === 'hand' ? 'Hand Gesture Studio' : 'Laser Writer';
-        $('engineStatus').textContent = `${activeName} active`;
         $('bridgeState').textContent = `${activeName} running`;
       }
+      ['launchLaser', 'launchHand'].forEach(id => { if ($(id)) $(id).disabled = launchInProgress; });
     } catch (_) {
-      $('bridgeState').textContent = 'Offline';
-      $('portalStatus').textContent = 'Not connected';
-      ['launchLaser', 'launchHand'].forEach(id => { if ($(id)) $(id).disabled = true; });
+      $('bridgeState').textContent = 'Offline — start local bridge';
+      $('portalStatus').textContent = 'Bridge offline';
+      $('engineStatus').textContent = 'Start START_DESKTOP_BRIDGE.bat';
+      $('engineDot').className = 'status-indicator amber';
+      // Offline status must not turn the launch buttons into dead controls.
+      ['launchLaser', 'launchHand'].forEach(id => { if ($(id)) $(id).disabled = launchInProgress; });
     }
   }
 
   async function startDesktopMode(mode, buttonId) {
     const button = $(buttonId);
-    if (!button || button.disabled) return;
+    if (!button || launchInProgress) return;
     const other = $(buttonId === 'launchLaser' ? 'launchHand' : 'launchLaser');
+    launchInProgress = true;
     button.disabled = true;
     if (other) other.disabled = true;
     const copy = button.querySelector('.launch-mode-copy small');
@@ -219,15 +222,18 @@
     try {
       const result = await desktopApi('/api/desktop/start', { method: 'POST', body: { mode } });
       showToast(result.message || 'AIRWRITE desktop launch requested.', 'success');
-      setTimeout(refreshStatus, 1000);
-      setTimeout(refreshStatus, 2600);
+      setTimeout(refreshStatus, 900);
+      setTimeout(refreshStatus, 2200);
     } catch (error) {
       showToast(error.message, 'error');
-      button.disabled = false;
-      if (other) other.disabled = false;
+    } finally {
+      launchInProgress = false;
       if (copy) copy.textContent = mode === 'hand'
         ? 'Open the laptop webcam · learn gestures · draw, pan, zoom and control tools; no hand calibration'
         : 'Open the real desktop app · camera preview · quick 5-point calibration · Smart Board';
+      if (button) button.disabled = false;
+      if (other) other.disabled = false;
+      refreshStatus();
     }
   }
 
@@ -336,13 +342,10 @@
     try {
       const data = await api('/api/me');
       if (data.user) showWorkspace(data.user);
-      else showAuth('login');
     } catch (_) {
-      showAuth('login');
+      // Unauthenticated visitors stay on the opening film until they choose Enter AIRWRITE.
     }
   }
 
-  // Check existing session while the short intro is playing. If not signed in,
-  // the splash transitions to the authentication screen after its animation.
-  restoreSession();
+  // Restore returning users directly to their authenticated workspace.
 })();

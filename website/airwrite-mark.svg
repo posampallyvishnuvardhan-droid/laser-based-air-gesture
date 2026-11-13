@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="AIRWRITE optical mark">
+ <defs>
+  <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#34312c"/><stop offset="1" stop-color="#171614"/></linearGradient>
+  <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eee4d7"/><stop offset=".48" stop-color="#8e8173"/><stop offset="1" stop-color="#d8cabb"/></linearGradient>
+  <linearGradient id="beam" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#c83a31" stop-opacity=".18"/><stop offset=".68" stop-color="#ed5144"/><stop offset="1" stop-color="#ff9b80"/></linearGradient>
+  <filter id="glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ </defs>
+ <rect x="3" y="3" width="90" height="90" rx="24" fill="url(#shell)" stroke="#61584e" stroke-width="1.2"/>
+ <circle cx="43" cy="54" r="29" fill="#211f1b" stroke="url(#steel)" stroke-width="2"/>
+ <circle cx="43" cy="54" r="22" fill="none" stroke="#756b60" stroke-width="1.2"/>
+ <circle cx="43" cy="54" r="15" fill="#121211" stroke="#aa9b89" stroke-width="1.1"/>
+ <path d="M35 42 Q46 39 54 49 L43 54Z M57 49 Q61 60 50 66 L43 54Z M48 70 Q36 73 30 62 L43 54Z M28 56 Q25 45 36 41 L43 54Z" fill="#514a41" opacity=".78"/>
+ <circle cx="43" cy="54" r="5" fill="#e8ddd0" stroke="#817466" stroke-width="1"/>
+ <path d="M47 50 L79 18" stroke="#e74d42" stroke-width="6" stroke-linecap="round" opacity=".16" filter="url(#glow)"/>
+ <path d="M47 50 L79 18" stroke="url(#beam)" stroke-width="2.2" stroke-linecap="round"/>
+ <circle cx="80" cy="17" r="5.2" fill="#ef4d42" filter="url(#glow)"/>
+ <circle cx="80" cy="17" r="2" fill="#fff0e7"/>
+ <path d="M66 13 H75 M84 25 V34" stroke="#b7aa9a" stroke-width="1" opacity=".7"/>
+</svg>
