@@ -78,6 +78,36 @@
     return payload || {};
   }
 
+  function requestLocalLauncher() {
+    const link = document.createElement('a');
+    link.href = 'airwrite://start';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
+  async function waitForLocalBridge(timeoutMs = 90000) {
+    const deadline = Date.now() + timeoutMs;
+    while (Date.now() < deadline) {
+      try {
+        const data = await desktopApi('/api/status');
+        if (data.portal === 'online') return data;
+      } catch (_) {}
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    throw new Error('AIRWRITE backend did not start. Allow the AIRWRITE launcher in Chrome and try again.');
+  }
+
+  async function launchDesktopAfterLogin() {
+    try {
+      showToast('Starting AIRWRITE desktop…');
+      await waitForLocalBridge();
+      await startDesktopMode('laser', 'launchLaser');
+    } catch (error) {
+      showToast(error.message, 'error');
+    }
+  }
   function showAuth(mode = 'login') {
     splash.classList.add('leaving');
     authPage.classList.remove('hidden');
@@ -133,6 +163,7 @@
   loginForm.addEventListener('submit', async event => {
     event.preventDefault();
     if (!loginForm.reportValidity()) return;
+    requestLocalLauncher();
     const submit = loginForm.querySelector('button[type="submit"]');
     submit.disabled = true;
     authNotice('Verifying your account…');
@@ -143,8 +174,7 @@
       }});
       loginForm.reset();
       showWorkspace(result.user);
-      // Automatically open Laser Writer after successful sign-in.
-      setTimeout(() => startDesktopMode('laser', 'launchLaser'), 500);
+      void launchDesktopAfterLogin();
       showToast(`Welcome to AIRWRITE, ${result.user.full_name}.`, 'success');
     } catch (error) {
       authNotice(error.message);
