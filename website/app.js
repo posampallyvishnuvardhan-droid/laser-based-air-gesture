@@ -99,11 +99,11 @@
     throw new Error('AIRWRITE backend did not start. Allow the AIRWRITE launcher in Chrome and try again.');
   }
 
-  async function launchDesktopAfterLogin() {
+  async function ensureBackendAfterLogin() {
     try {
-      showToast('Starting AIRWRITE desktop…');
+      showToast('Connecting AIRWRITE desktop service…');
       await waitForLocalBridge();
-      await startDesktopMode('laser', 'launchLaser');
+      showToast('AIRWRITE is ready. Choose Laser Writer or Hand Gesture Studio.', 'success');
     } catch (error) {
       showToast(error.message, 'error');
     }
@@ -174,7 +174,7 @@
       }});
       loginForm.reset();
       showWorkspace(result.user);
-      void launchDesktopAfterLogin();
+      void ensureBackendAfterLogin();
       showToast(`Welcome to AIRWRITE, ${result.user.full_name}.`, 'success');
     } catch (error) {
       authNotice(error.message);
