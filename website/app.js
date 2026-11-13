@@ -143,6 +143,8 @@
       }});
       loginForm.reset();
       showWorkspace(result.user);
+      // Automatically open Laser Writer after successful sign-in.
+      setTimeout(() => startDesktopMode('laser', 'launchLaser'), 500);
       showToast(`Welcome to AIRWRITE, ${result.user.full_name}.`, 'success');
     } catch (error) {
       authNotice(error.message);
